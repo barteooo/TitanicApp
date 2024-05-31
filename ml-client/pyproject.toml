@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "ml-client"
+version = "0.1.0"
+description = "API with ML-Client endpoint"
+authors = ["barteooo <bartlomiejwnuk03@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+scikit-learn = "^1.5.0"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.0"
+
+[tool.poetry.group.dev.dependencies]
+pandas = "^2.2.2"
+seaborn = "^0.13.2"
+matplotlib = "^3.9.0"
+ipykernel = "^6.29.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
