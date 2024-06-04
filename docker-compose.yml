@@ -1,0 +1,17 @@
+volumes:
+  pgdata-volume:
+  
+services:
+  titanic_db: 
+    build: ./database
+    container_name: titanic_db
+    ports:
+      - 6666:5432
+    volumes:
+      - pgdata-volume:/var/lib/postgresql/data
+    env_file: 
+      - ./database/.env
+
+
+
+
