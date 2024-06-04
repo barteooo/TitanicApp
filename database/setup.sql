@@ -12,3 +12,5 @@ CREATE TABLE crew (
     cabin VARCHAR,  
     embarked VARCHAR
 );
+
+\copy crew FROM '/titanic.csv' DELIMITER ',' CSV HEADER;
