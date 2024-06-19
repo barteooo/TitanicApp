@@ -7,7 +7,7 @@ CREATE TABLE crew (
     age REAL,
     no_sibling_spouses INT, 
     no_parents_children INT,
-    ticekt VARCHAR, 
+    ticket VARCHAR, 
     fare REAL, 
     cabin VARCHAR,  
     embarked VARCHAR
