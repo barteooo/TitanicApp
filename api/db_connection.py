@@ -36,7 +36,15 @@ def create_crew_member(member: dto.CrewMember.CrewMember) -> CrewMemberORM:
         return new_member
         
     except Exception as e:
-        print(e)
+        print(e) 
         return None
 
+
+def read_crew_member(passenger_id: str) -> CrewMemberORM: 
+    return (
+        session
+        .query(CrewMemberORM)
+        .where(CrewMemberORM.passenger_id.in_([passenger_id]))
+        .first()
+    )
 

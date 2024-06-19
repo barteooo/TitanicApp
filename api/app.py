@@ -25,9 +25,16 @@ async def post_crew_member(member: CrewMember):
             detail=f"Member of ID {member.passenger_id} already exists."
         )
     
-@app.get("/crew/{passenger_id}")
+@app.get("/crew/{passenger_id}", response_class=JSONResponse)
 async def get_crew_member(passenger_id: str):
-    pass
+    member = db.read_crew_member(passenger_id) 
+    if not member: 
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail=f"Member with IF {passenger_id} not found"
+        )
+    return member       
+    
 
 @app.delete("/crew/{passenger_id}", response_class=JSONResponse)
 async def delete_crew_member(passenger_id: str):
