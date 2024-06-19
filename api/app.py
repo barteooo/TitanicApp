@@ -38,8 +38,13 @@ async def get_crew_member(passenger_id: str):
 
 @app.delete("/crew/{passenger_id}", response_class=JSONResponse)
 async def delete_crew_member(passenger_id: str):
-    pass
-
+    deleted = db.delete_crew_member(passenger_id)
+    if not deleted: 
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail=f"member with {passenger_id} id coudn't be deleted"
+        )
+    return {"message:" f"member with id {passenger_id} has been deleted"}
 
 
 

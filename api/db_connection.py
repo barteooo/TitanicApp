@@ -39,7 +39,6 @@ def create_crew_member(member: dto.CrewMember.CrewMember) -> CrewMemberORM:
         print(e) 
         return None
 
-
 def read_crew_member(passenger_id: str) -> CrewMemberORM: 
     return (
         session
@@ -47,4 +46,17 @@ def read_crew_member(passenger_id: str) -> CrewMemberORM:
         .where(CrewMemberORM.passenger_id.in_([passenger_id]))
         .first()
     )
+
+def delete_crew_member(passenger_id: str) -> bool: 
+    member = (
+        session
+        .query(CrewMemberORM)
+        .where(CrewMemberORM.passenger_id == passenger_id)
+        .first()
+    )
+    if member:
+        session.delete(member)
+        session.commit()
+        return True;
+    return False;
 
