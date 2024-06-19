@@ -13,7 +13,7 @@ class CrewMember(Base):
     age: Mapped[Optional[float]]
     no_sibling_spouses: Mapped[int]
     no_parents_children: Mapped[int]
-    ticekt: Mapped[str]
+    ticket: Mapped[str]
     fare: Mapped[float]
     cabin: Mapped[Optional[str]]
     embarked: Mapped[Optional[str]] 
