@@ -1,10 +1,15 @@
+import os
 from typing import List
 import dto.CrewMember
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from orm.CrewMember import CrewMember as CrewMemberORM
 
-engine = create_engine(f"postgresql://postgres:1234@localhost:6666/titanic")  
+user = os.environ.get("POSTGRES_USER")
+password = os.environ.get("POSTGRES_PASSWORD") 
+ip = os.environ.get("POSTGRES_IP", "localhost") 
+port = os.environ.get("POSTGRES_PORT",6666)
+engine = create_engine(f"postgresql://{user}:{password}@{ip}:{port}/titanic")  
 session = Session(engine)
 
 
