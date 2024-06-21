@@ -19,8 +19,12 @@ services:
       - 8080:8000
     env_file:
       - ./api/.env
-    depends_on: [titanic_db]
-
+    depends_on: [titanic_db] 
+  titanic_web:
+    build: web/
+    container_name: titanic_web_container
+    ports:
+      - 3030:3000
   keycloak:
     image: quay.io/keycloak/keycloak:21.0.2
     container_name: keycloak_container
