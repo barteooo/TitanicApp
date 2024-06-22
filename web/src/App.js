@@ -19,7 +19,7 @@ function App() {
               element={
                 <PrivateRoute>
                   <SecuredPage />
-                </PrivateRoute>
+                </PrivateRoute> 
               }
             />
           </Routes>
