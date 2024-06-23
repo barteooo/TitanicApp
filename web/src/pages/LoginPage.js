@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/LoginPage.css'; 
 import backgroundImage1 from '../images/titanic5.png'; 
 import backgroundImage2 from '../images/titanic6.png';
@@ -7,14 +7,25 @@ import backgroundImage4 from '../images/titanic8.png';
 import backgroundImage5 from '../images/titanic9.png';
 import backgroundImage6 from '../images/titanic3.png';
 import { useKeycloak } from '@react-keycloak/web';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const { keycloak, initialized } = useKeycloak();
-    const login = async () => {
+    const { keycloak, initialized } = useKeycloak(); 
+    const navigate = useNavigate();
+    const login = async () => { 
+
         if (keycloak && !keycloak.authenticated) {
-          await keycloak.login()
+          await keycloak.login()  
+          console.log("Authenticated:", keycloak.authenticated);
         }
       };
+      useEffect(() => {
+        if(keycloak.authenticated){
+            console.log("Redirecting to logged page")
+            navigate("/logged")
+        }
+
+      },[keycloak.authenticated])
 
     return (
         <div className="login-container">
