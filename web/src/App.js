@@ -16,7 +16,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<LoginPage />} /> 
-            <Route path='/logged' element={<LoggedPage />} />
+            <Route path='/logged' element={<LoggedPage />} /> 
+            <Route path='/*' element={<LoginPage />} />
             {/* <Route
               path="/secured"
               element={Oto
