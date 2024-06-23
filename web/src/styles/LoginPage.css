@@ -1,0 +1,58 @@
+.login-container {
+  font-family: Arial, sans-serif; 
+  text-align: center;
+  background-color: #fff; 
+  padding: 20px; 
+}
+
+h1 {
+  color: black;
+  font-size: 50px;
+  margin-bottom: 2px;
+}
+
+
+.login-button {
+  background-color: green;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 30px; 
+  width: 200px;
+}
+
+.login-button:hover {
+  background-color: #444;
+}
+
+.photo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.photo-row {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.photo {
+  background-color: #ddd; /* Szare tło, zastąp odpowiednimi obrazami */
+  width: 300px; /* Przykładowa szerokość */
+  height: 250px; /* Przykładowa wysokość */
+  background-size: cover;
+  background-position: center; 
+
+}
+
+.ampersand {
+    font-size: 40px; /* Ustal rozmiar czcionki dla & */
+    color: black; /* Ustal kolor tekstu */
+    margin: 10px 0; /* Dodaj margines górny i dolny dla odstępu */ 
+    font-weight: bolder; 
+    
+}
+
