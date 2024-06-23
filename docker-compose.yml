@@ -1,6 +1,5 @@
 volumes:
   pgdata-volume:
-  
 services:
   titanic_db: 
     build: ./database
@@ -11,7 +10,6 @@ services:
       - pgdata-volume:/var/lib/postgresql/data
     env_file: 
       - ./database/.env
-
   titanic_api:
     build: ./api
     container_name: titanic_api
@@ -24,7 +22,12 @@ services:
     build: web/
     container_name: titanic_web
     ports:
-      - 3030:3000 
+      - 3030:3000  
+  ml_client:
+    build: ./ml-client 
+    container_name: ml_client
+    ports:
+      - 8765:8765
   keycloak:
     image: quay.io/keycloak/keycloak:21.0.2
     container_name: keycloak
@@ -35,4 +38,5 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
     command: start-dev 
     volumes:
-      - ~/keycloak_data:/opt/keycloak/data/
+      - ~/keycloak_data:/opt/keycloak/data/ 
+    
