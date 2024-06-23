@@ -8,8 +8,6 @@ app = FastAPI()
 
 with open("./Ai-model/model.pkl", "rb") as file:
     model = pickle.load(file)
-with open("./Ai-model/scaler.pkl", "rb") as file:
-    scaler = pickle.load(file)
 
 class Passenger(BaseModel):
     age: float
@@ -26,13 +24,12 @@ class Passenger(BaseModel):
 def predict_survival(passenger: Passenger):
     passenger_data = passenger.dict()
     
+    # Zdefiniuj kolejność kolumn, aby odpowiadała oczekiwaniom modelu
     column_order = ['age', 'no_sibling_spouses', 'no_parents_children', 'fare', 
                     'sex_male', 'passenger_class_2', 'passenger_class_3', 'embarked_Q', 'embarked_S']
     input_data = pd.DataFrame([passenger_data])[column_order]  
-
-    numerical_columns = ['age', 'no_sibling_spouses', 'no_parents_children', 'fare']
-    input_data[numerical_columns] = scaler.transform(input_data[numerical_columns])
     
+    # Usunięto skalowanie danych numerycznych
     sample_data_reshaped = input_data.values.reshape(1, -1)
     prediction = model.predict(sample_data_reshaped)
     survival = bool(prediction[0])
