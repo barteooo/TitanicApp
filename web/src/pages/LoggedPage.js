@@ -1,6 +1,6 @@
 import { useKeycloak } from '@react-keycloak/web';
 import React, { useEffect } from 'react';
-import { navigate, useNavigate } from 'react-router-dom';
+import { navigate, useNavigate } from 'react-router-dom'; 
 
 
 
@@ -11,6 +11,10 @@ const LoggedPage = () => {
   const logout =  () => {
      keycloak.logout(); 
   } 
+
+  const goToPredictionPage = () => {
+    navigate("/predict")
+  }
   useEffect(() => {
     if(!keycloak.authenticated){
       navigate("/")
@@ -29,8 +33,8 @@ const LoggedPage = () => {
     onClick={() => logout()}
     >
       Logout 
-    </button>
-
+    </button> 
+    <button onClick={goToPredictionPage}>Check chance of survive</button>
    </div>
    </>
 
