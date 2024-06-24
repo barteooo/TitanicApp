@@ -6,9 +6,10 @@ import Nav from "./components/Nav"
 import WelcomePage from "./pages/Homepage" 
 import LoginPage from './pages/LoginPage'; 
 import LoggedPage from "./pages/LoggedPage"; 
-import PredictionPage from './pages/PredictionPage';
+import PredictionPage from './pages/PredictionPage'; 
+import AdminPage from './pages/AdminPage'; 
 // import SecuredPage from "./pages/SecuredPage"
-// import PrivateRoute from "./helpers/PrivateRoute"
+import PrivateRoute from "./helpers/PrivateRoute"
 function App() {
   return (
     <div>
@@ -19,7 +20,12 @@ function App() {
             <Route exact path="/" element={<LoginPage />} /> 
             <Route path='/logged' element={<LoggedPage />} /> 
             <Route path='/predict' element={<PredictionPage />} /> 
-            <Route path='/*' element={<LoginPage />} />
+            <Route path='/*' element={<LoginPage />} /> 
+            <Route path='/admin' element={
+                  <PrivateRoute>
+                  <AdminPage />
+                  </PrivateRoute>
+              } />
             {/* <Route
               path="/secured"
               element={Oto

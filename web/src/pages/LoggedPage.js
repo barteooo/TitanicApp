@@ -6,7 +6,8 @@ import { navigate, useNavigate } from 'react-router-dom';
 
 const LoggedPage = () => {
   const {keycloak, initialized} = useKeycloak();  
-  const navigate = useNavigate()
+  const navigate = useNavigate() 
+  const isAdmin = keycloak.authenticated && keycloak.hasRealmRole('admin')
 
   const logout =  () => {
      keycloak.logout(); 
@@ -14,6 +15,10 @@ const LoggedPage = () => {
 
   const goToPredictionPage = () => {
     navigate("/predict")
+  } 
+
+  const goToAdminPage = () => {
+    navigate("/admin")
   }
   useEffect(() => {
     if(!keycloak.authenticated){
@@ -35,6 +40,9 @@ const LoggedPage = () => {
       Logout 
     </button> 
     <button onClick={goToPredictionPage}>Check chance of survive</button>
+    {isAdmin && (
+          <button onClick={goToAdminPage}>Admin Section</button>
+        )}
    </div>
    </>
 
