@@ -2,9 +2,18 @@ from fastapi import FastAPI, HTTPException, status
 from db_connection import get_all_crew_members
 from fastapi.responses import JSONResponse 
 from dto.CrewMember import CrewMember 
+from fastapi.middleware.cors import CORSMiddleware
 import db_connection as db
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 async def root(): 
