@@ -1,6 +1,0 @@
-registry:
-  imagePullSecrets: registry-creds
-
-api.image:
-database.image:
-webapp.image:
