@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: titanic-db-env
+data:
+  # Populate with your environment variables from ./database/.env
+  POSTGRES_PASSWORD: "1234"
+  POSTGRES_DB: titanic
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: titanic-api-env
+data:
+  # Populate with your environment variables from ./api/.env
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: "1234"
+  POSTGRES_IP: titanic-db
+  POSTGRES_PORT: "5432"

@@ -1,0 +1,19 @@
+1. config get-contexts -> wyświetla dostępne konteksty i ten którego obecnie uywamy 
+
+2. kubectl apply -f configmap.yaml -> aplikacja danych konfiguracyjnych do klastra.
+ Będą one dostępne dla podów i aplikacji w klastrze. 
+ W tym wypadku zmienne środowiskowe dla bazy danych i naszego api będą dostępne dla kazdego wezla
+ w klastrze i wszystkich jego podów
+
+3. kubectl apply -f db-volumes.yaml -> aplikacja voluminu odpowiedzialnego za bazę danych. 
+Wolumin moze być uzywany przez tylko jeden Pod w klastrze w danym momencie
+
+4. kubectl apply -f keycloak.yaml -> Aplikuje konfigurację dla Keycloak.
+tworzy Deployment(Uruchamua pod z tym serwisem) i Service dla aplikacji Keycloak(Service określa, jak aplikacja będzie dostępna dla innych podów)
+
+
+
+
+ 
+
+

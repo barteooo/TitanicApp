@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanic-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titanic-web
+  template:
+    metadata:
+      labels:
+        app: titanic-web
+    spec:
+      containers:
+        - name: titanic-web
+          image: barteoo/web-v2
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanic-web
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: titanic-web
+  type: NodePort

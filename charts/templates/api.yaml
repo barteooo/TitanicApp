@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanic-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titanic-api
+  template:
+    metadata:
+      labels:
+        app: titanic-api
+    spec:
+      containers:
+        - name: titanic-api
+          image: barteoo/api-v1
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: titanic-api-env
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanic-api
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: titanic-api
+  type: NodePort

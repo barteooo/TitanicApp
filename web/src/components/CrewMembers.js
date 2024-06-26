@@ -19,13 +19,14 @@ const CrewMembers = () => {
         <div>
             <h1>Crew Members</h1>
             {crewMembers.map(member => ( 
-                <>
+                <div key={member.passenger_id}>
                     <CrewMember key={member.passenger_id} id={member.passenger_id} name={member.passenger_name} age={member.age}/> 
                     <DeleteButton key={member.passenger_id} id={member.passenger_id} fetchData={fetchData}/>
-                </>    
+                </div>    
             ))}
         </div>
     );
 };
-
 export default CrewMembers;
+
+

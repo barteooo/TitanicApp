@@ -1,0 +1,29 @@
+# Definicja Persistent Volume (PV):
+# Ta sekcja definiuje Persistent Volume w Kubernetes, który jest zasobem przechowywania danych dostępnym dla podów.
+# Zdefiniowany tutaj PV oferuje 1Gi przestrzeni na danych na określonej ścieżce hosta.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pgdata-volume
+spec:
+  accessModes:
+    # moze byc uzywane przez tylko jeden węzeł klastra w danym momencie
+    - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /var/lib/postgresql/data
+---
+# Definicja Persistent Volume Claim (PVC):
+# Ta sekcja definiuje Persistent Volume Claim w Kubernetes, który jest żądaniem o przydzielenie zasobu przechowywania danych określonego w PV.
+# PVC definiowane tutaj żąda 1Gi przestrzeni na danych, co musi być zgodne z dostępną pojemnością w PV.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgdata-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
