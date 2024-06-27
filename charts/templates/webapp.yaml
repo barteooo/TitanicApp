@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: titanic-web
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: titanic-web

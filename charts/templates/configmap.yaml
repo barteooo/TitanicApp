@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: titanic-db-env
 data:
-  # Populate with your environment variables from ./database/.env
   POSTGRES_PASSWORD: "1234"
   POSTGRES_DB: titanic
 
@@ -13,7 +12,6 @@ kind: ConfigMap
 metadata:
   name: titanic-api-env
 data:
-  # Populate with your environment variables from ./api/.env
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: "1234"
   POSTGRES_IP: titanic-db

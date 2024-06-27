@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: titanic-db
   serviceName: "titanic-db"
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
