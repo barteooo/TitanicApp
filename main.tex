@@ -1,0 +1,219 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont} 
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[top=1in, bottom=1.5in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\graphicspath{{Imagens/}}
+\usepackage{xcolor,colortbl}
+\usepackage{float}
+
+\newcommand \comment[1]{\textbf{\textcolor{red}{#1}}}
+
+%\usepackage{float}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{indentfirst}
+\usepackage{placeins}
+\usepackage{scalefnt}
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{framed}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codepurple},
+	numberstyle=\numberstyle,
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=10pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+}
+\lstset{style=mystyle}
+
+\newcommand\numberstyle[1]{%
+	\footnotesize
+	\color{codegray}%
+	\ttfamily
+	\ifnum#1<10 0\fi#1 |%
+}
+
+\definecolor{shadecolor}{HTML}{F2F2F2}
+
+\newenvironment{sqltable}%
+{\snugshade\verbatim}%
+{\endverbatim\endsnugshade}
+
+% Margins
+\addtolength{\footskip}{0cm}
+\addtolength{\textwidth}{1.4cm}
+\addtolength{\oddsidemargin}{-.7cm}
+
+\addtolength{\textheight}{1.6cm}
+%\addtolength{\topmargin}{-2cm}
+
+% paragrafo
+\addtolength{\parskip}{.2cm}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\rhead{\hmwkAuthorName} % Top left header
+\lhead{\hmwkClass: \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{Bartłomiej Wnuk} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{} % Bottom right footer
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+    
+\newcommand{\hmwkTitle}{Titanic App} % Tytuł projektu
+\newcommand{\hmwkDueDate}{\today} % Data 
+\newcommand{\hmwkClass}{Technologie chmurowe} % Nazwa przedmiotu
+\newcommand{\hmwkAuthorName}{Bartłomiej Wnuk} % Imię i nazwisko
+
+% trabalho 
+\begin{document}
+% capa
+\begin{titlepage}
+    \vfill
+	\begin{center}
+	\hspace*{-1cm}
+	\vspace*{0.5cm}
+    \includegraphics[scale=0.55]{imagens/loga.png}\\
+	\textbf{Uniwersytet Gdański \\ [0.05cm]Wydział Matematyki, Fizyki i Informatyki \\ [0.05cm] Instytut Informatyki}
+
+	\vspace{0.6cm}
+	\vspace{4cm}
+	{\huge \textbf{\hmwkTitle}}\vspace{8mm}
+	
+	{\large \textbf{\hmwkAuthorName}}\\[3cm]
+	
+		\hspace{.45\textwidth} %posiciona a minipage
+	   \begin{minipage}{.5\textwidth}
+	   Projekt z przedmiotu technologie chmurowe na kierunku informatyka profil praktyczny na Uniwersytecie Gdańskim.\\[0.1cm]
+	  \end{minipage}
+	  \vfill
+	%\vspace{2cm}
+	
+	\textbf{Gdańsk}
+	
+	\textbf{\hmwkDueDate}
+	\end{center}
+	
+\end{titlepage}
+
+\newpage
+\setcounter{secnumdepth}{5}
+\tableofcontents
+\newpage
+
+\section{Opis projektu}
+\label{sec:Project}
+Australijski miliarder postanowił odbudować Titanica – nowy statek ma być oddany do użytku w 2027 roku. To właśnie wtedy będzie można zapisać się na rejs i przepłynąć trasę, która była zaplanowana na 1912 rok. Firma, która będzie zajmować się organizacją rejsu poprosiła o stworzenie aplikacji, która będzie pozwalała na zapisanie się na rejs oraz sprawdzenie szans na przeżycie gdyby okazało się, że statek znowu uderzy w górę lodową i zacznie tonąć.
+
+\subsection{Opis architektury - 8 pkt}
+\label{sec:introduction}
+Architektura systemowa projektu opiera się na podejściu mikroserwisów, co oznacza, że różne funkcjonalności aplikacji są realizowane przez niezależne komponenty (mikroserwisy), które komunikują się ze sobą. Aplikacja jest zbudowana z pięciu serwisów hostowanych na klastrze Kubernetes \\
+    \\
+    1. Serwis frontendowy - interfejs użytkownika \\
+    2. Baza danych \\
+    3. Serwis backendowy - zarządzanie bazą danych\\
+    4. Serwis integracji z klientem uczenia maszynowego \\
+    5. Serwis autentykacji Keycloak \\
+
+\subsection{Opis infrastruktury - 6 pkt}
+\label{sec:Users}
+
+\subsubsection{Docker}
+Każdy mikroserwis jest
+zapakowany w osobny kontener Dockerowy. Kontenery zawierają wszystkie
+zależności potrzebne do uruchomienia aplikacji.
+\subsubsection{Docker-compose} 
+Służy do definiowania i uruchamiania wielokontenerowych
+aplikacji Dockerowych. Plik docker-compose.yml opisuje konfigurację
+kontenerów, sieci i wolumenów dla lokalnego środowiska deweloperskiego.
+\subsubsection{Kubernetes} 
+Aplikacja jest zaprojektowana do działania w środowisku Kubernetes, wykorzystując Docker Desktop jako platformę deweloperską. Dzięki temu środowisku możliwa jest szybka orkiestracja kontenerów Docker, co jest idealne dla celów deweloperskich i testowych. Do zarządzania klastrami Kubernetes używamy narzędzia `kubectl`, co umożliwia efektywne wdrażanie, skalowanie oraz monitorowanie usług. Konfiguracja w Docker Desktop zapewnia izolowane sieci(każdy kontener ma swoją własną odseparowaną sieć) i zarządzanie pamięcią masową za pomocą Persistent Volumes. Pozwalają one na przechowywanie danych bez względu na cykl życia poszczególnych podów. 
+
+\subsection{Opis komponentów aplikacji - 8 pkt}
+\label{sec:FunctionalConditions} \\
+\subsubsection{Serwis frontendowy - interfejs użytkownika}
+Stworzony przy użyciu technologi React. Umożliwia logowanie istniejących użytkowników. Zawiera również w sobie interfejs odpowiadający za wyświetlenie predykcji przeżycia. Konto administartora zawiera interfejs umożliwiający usuwanie użytkowników z bazy danych.
+\subsubsection{Baza danych} 
+Stworzona przy użyciu Postgresql. Zawiera osoby jakie wzięły udział w wyprawie w 1912 roku oraz jest przygotowana na dodawanie nowych użytkowników, którzy chcieliby zapisać się na rejs. 
+\subsubsection{Serwis backendowy - zarządzanie bazą danych} 
+Stworzony przy użyciu technologi FastAPI w Pythonie. Umożliwia wykonywanie operacji na członkach załogi przez integrację z bazą danych - ich tworzenie, usuwanie oraz odczytywanie.
+\subsubsection{Serwis integracji z klientem uczenia maszynowego} 
+Stworzone przy użyciu technologi FastAPI oraz Scikit Learn w pythonie. Zawiera wytrenowany model oraz API do odbierania danych wejściowych, które są przekazywane do modelu w celu zwrócenia wyniku predykcji. 
+\subsubsection {Serwis autentykacji Keycloak}  
+Został użyty do zabezpieczenia frontendu i umożliwienia bezpiecznego logowania z uwzględnieniem rol użytkowników.
+ 
+\subsection{Konfiguracja i zarządzanie - 4 pkt}
+\label{sec:NonFunctionalConditions} 
+\subsubsection {Deploymenty} 
+Każdy komponent aplikacji jest uruchamiany jako osobny Deployment w Kubernetes. Deploymenty pozwalają na łatwe skalowanie i aktualizację komponentów aplikacji.
+\subsubsection {ConfigMaps} 
+Zarządzanie w systemie odbywa się za pomocą ConfigMap w Kubernetesie, co umożliwia wstrzykiwanie wartości per środowisko.
+\subsubsection {Persistent Volume Claims} 
+Dane bazy danych są przechowywane na Persistent Volume za pomocą Persistent Volume Claim - usługi, która jest żądaniem o przydzielenie zasobu przechowywania danych określonego w Persistent Volume.
+
+\subsection{Zarządzanie błędami - 2 pkt}
+\label{sec:ERD} 
+\subsubsection{Aplikacja}
+Zarządzanie błędami na poziomie aplikacji skupia się na walidacji requestów HTTP, co pozwala na wczesne wykrycie i obsługę błędnych danych. 
+\subsubsection{Kubernetes} 
+Dla deploymentu każda usługa korzysta z mechanizmu replikacji, który przekieruje do drugiego poda gdy pierwszy napotka problem.
+
+\subsection{Skalowalność - 4 pkt}
+\label{sec:ExamplesSection}
+Skalowanie horyzontalne - pozwala na automatyczne skalowanie liczby replik kontenerów w zależności od obciążenia.Liczba replik w deploymentach serwisów została zwiększona do dwóch co pozwala na lepsze rozłożenie obciążenia dla każdego z komponentów aplikacji.
+
+\subsection{Wymagania dotyczące zasobów - 2 pkt}
+\label{sec:ExampleTables}
+
+
+
+
+\subsection{Architektura sieciowa - 4 pkt}
+\label{sec:ExampleResults}
+\subsubsection{Protokół http} 
+ - komunikacja frontendu z keycloakiem \\
+ - komunikacja frontendu z backendem 
+ \subsubsection{Protokół bazodanowy postgresql}
+ - komunikacja backendu z bazą danych 
+  \subsubsection{Protokół OAuth2 z keycloak}
+- zarządzanie sesją użytkownika oraz jej autoryzacją
+\noindent
+
+
+\bibliographystyle{amsplain}
+\bibliography{references.bib}
+\nocite{*}
+
+\end{document}z
